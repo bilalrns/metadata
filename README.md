@@ -26,31 +26,13 @@ These instructions will get you a copy of the project up and running on your loc
 Clone the repository:
 
 ```
-$ git clone https://github.com/mirumee/saleor-dashboard.git
+$ git clone https://github.com/bilalrns/metadata.git
 ```
 
 Enter the project directory:
 
 ```
-$ cd saleor-dashboard
-```
-
-#### Using stable release
-
-To use the official stable release, checkout to a release tag:
-
-```
-$ git checkout 2.10.0
-```
-
-See the list of all releases here: https://github.com/mirumee/saleor-dashboard/releases/
-
-#### Using development version
-
-If you want to use the latest development version, checkout to the `master` branch:
-
-```
-$ git checkout master
+$ cd metadata
 ```
 
 Install NPM dependencies:
@@ -59,18 +41,11 @@ Install NPM dependencies:
 $ npm i
 ```
 
-### Configuration
+### Configuration with backend
 
-There are two environment variables available for configuration:
-
-- `API_URI` (required) - URI of a running instance of Saleor GraphQL API.
-  If you are running Saleor locally with the default settings, set `API_URI` to: `http://localhost:8000/graphql/`.
-
-- `APP_MOUNT_URI` - URI at which the Dashboard app will be mounted.
-  E.g. if you set `APP_MOUNT_URI` to `/dashboard/`, your app will be mounted at `http://localhost:9000/dashboard/`.
-
-- `STATIC_URL` - URL where the static files are located.
-  E.g. if you use S3 bucket, you should set it to the bucket's URL. By default Saleor assumes you serve static files from the root of your site at `http://localhost:9000/`.
+```
+export API_URI=http://localhost:8000/graphql/
+```
 
 ### Development
 
