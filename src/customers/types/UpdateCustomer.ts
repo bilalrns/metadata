@@ -85,4 +85,5 @@ export interface UpdateCustomer {
 export interface UpdateCustomerVariables {
   id: string;
   input: CustomerInput;
+  metadata: any;
 }

@@ -137,6 +137,10 @@ export const productFragmentDetails = gql`
       id
       name
     }
+    metadata {
+      key
+      value
+    }
     basePrice {
       ...Money
     }

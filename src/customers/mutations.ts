@@ -46,13 +46,29 @@ export const accountErrorFragment = gql`
 const updateCustomer = gql`
   ${accountErrorFragment}
   ${customerDetailsFragment}
-  mutation UpdateCustomer($id: ID!, $input: CustomerInput!) {
+  mutation UpdateCustomer(
+    $id: ID!
+    $metadata: [MetadataInput!]!
+    $input: CustomerInput!
+  ) {
     customerUpdate(id: $id, input: $input) {
       errors: accountErrors {
         ...AccountErrorFragment
       }
       user {
         ...CustomerDetailsFragment
+      }
+    }
+    updateMetadata(id: $id, input: $metadata) {
+      metadataErrors {
+        field
+        code
+      }
+      item {
+        metadata {
+          key
+          value
+        }
       }
     }
   }

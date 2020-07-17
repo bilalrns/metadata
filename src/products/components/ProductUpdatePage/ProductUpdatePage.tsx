@@ -46,6 +46,7 @@ import {
 import ProductAttributes, { ProductAttributeInput } from "../ProductAttributes";
 import ProductDetailsForm from "../ProductDetailsForm";
 import ProductImages from "../ProductImages";
+import ProductItemMetaConfig from "../ProductItemMetaConfig";
 import ProductOrganization from "../ProductOrganization";
 import ProductPricing from "../ProductPricing";
 import ProductVariants from "../ProductVariants";
@@ -86,6 +87,7 @@ export interface ProductUpdatePageSubmitData extends ProductUpdatePageFormData {
   addStocks: ProductStockInput[];
   updateStocks: ProductStockInput[];
   removeStocks: string[];
+  metadata: any;
 }
 
 export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
@@ -168,6 +170,7 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
       stock => stock.warehouse.id
     );
     const stockDiff = diff(variantStocks, dataStocks);
+    const combineExceptionsArray = data.combineExceptions.split(",");
 
     onSubmit({
       ...data,
@@ -175,6 +178,76 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
         stockDiff.added.some(addedStock => addedStock === stock.id)
       ),
       attributes,
+      metadata: [
+        {
+          key: "combineExceptions",
+          value: combineExceptionsArray
+        },
+        {
+          key: "itemNumber",
+          value: data.itemNumber
+        },
+        {
+          key: "itemSizeHeight",
+          value: data.itemSizeHeight
+        },
+        {
+          key: "itemSizeLength",
+          value: data.itemSizeLength
+        },
+        {
+          key: "itemSizeWidth",
+          value: data.itemSizeWidth
+        },
+        {
+          key: "itemStackConfigHeight",
+          value: data.itemStackConfigHeight
+        },
+        {
+          key: "itemStackConfigLength",
+          value: data.itemStackConfigLength
+        },
+        {
+          key: "itemStackConfigWidth",
+          value: data.itemStackConfigWidth
+        },
+        {
+          key: "shipClassLTL1",
+          value: data.shipClassLTL1
+        },
+        {
+          key: "shipClassLTL2",
+          value: data.shipClassLTL2
+        },
+        {
+          key: "shipClassLTL3",
+          value: data.shipClassLTL3
+        },
+        {
+          key: "shipClassLTL4",
+          value: data.shipClassLTL4
+        },
+        {
+          key: "shipClassLTL5",
+          value: data.shipClassLTL5
+        },
+        {
+          key: "shipClassLTL6",
+          value: data.shipClassLTL6
+        },
+        {
+          key: "shipClassLTL7",
+          value: data.shipClassLTL7
+        },
+        {
+          key: "shipClassLTL8",
+          value: data.shipClassLTL8
+        },
+        {
+          key: "weight",
+          value: data.weight
+        }
+      ],
       removeStocks: stockDiff.removed,
       updateStocks: stocks.filter(
         stock => !stockDiff.added.some(addedStock => addedStock === stock.id)
@@ -247,6 +320,14 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
                   )}
                   <CardSpacer />
                   <ProductPricing
+                    currency={currency}
+                    data={data}
+                    disabled={disabled}
+                    errors={errors}
+                    onChange={change}
+                  />
+                  <CardSpacer />
+                  <ProductItemMetaConfig
                     currency={currency}
                     data={data}
                     disabled={disabled}

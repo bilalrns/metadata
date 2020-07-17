@@ -1044,6 +1044,12 @@ export const customer: CustomerDetails_user & CustomerAddresses_user = {
       }
     ]
   },
+  metadata: [
+    {
+      key: "",
+      value: ""
+    }
+  ],
   note: null,
   orders: {
     __typename: "OrderCountableConnection",

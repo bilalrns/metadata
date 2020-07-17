@@ -181,12 +181,80 @@ export interface ProductUpdatePageFormData {
   seoTitle: string;
   sku: string;
   trackInventory: boolean;
+  itemNumber: string;
+  weight: string;
+  itemStackConfigLength: string;
+  itemStackConfigWidth: string;
+  itemStackConfigHeight: string;
+  itemSizeLength: string;
+  itemSizeWidth: string;
+  itemSizeHeight: string;
+  combineExceptions: any;
+  shipClassLTL1: string;
+  shipClassLTL2: string;
+  shipClassLTL3: string;
+  shipClassLTL4: string;
+  shipClassLTL5: string;
+  shipClassLTL6: string;
+  shipClassLTL7: string;
+  shipClassLTL8: string;
 }
 
 export function getProductUpdatePageFormData(
   product: ProductDetails_product,
   variants: ProductDetails_product_variants[]
 ): ProductUpdatePageFormData {
+  const itemNumberValue = maybe(() =>
+    product.metadata.filter(item => item.key === "itemNumber")
+  );
+  const weightValue = maybe(() =>
+    product.metadata.filter(item => item.key === "weight")
+  );
+  const itemStackConfigLengthValue = maybe(() =>
+    product.metadata.filter(item => item.key === "itemStackConfigLength")
+  );
+  const itemStackConfigWidthValue = maybe(() =>
+    product.metadata.filter(item => item.key === "itemStackConfigWidth")
+  );
+  const itemStackConfigHeightValue = maybe(() =>
+    product.metadata.filter(item => item.key === "itemStackConfigHeight")
+  );
+  const itemSizeLengthValue = maybe(() =>
+    product.metadata.filter(item => item.key === "itemSizeLength")
+  );
+  const itemSizeWidthValue = maybe(() =>
+    product.metadata.filter(item => item.key === "itemSizeWidth")
+  );
+  const itemSizeHeightValue = maybe(() =>
+    product.metadata.filter(item => item.key === "itemSizeHeight")
+  );
+  const combineExceptionsValue = maybe(() =>
+    product.metadata.filter(item => item.key === "combineExceptions")
+  );
+  const shipClassLTL1Value = maybe(() =>
+    product.metadata.filter(item => item.key === "shipClassLTL1")
+  );
+  const shipClassLTL2Value = maybe(() =>
+    product.metadata.filter(item => item.key === "shipClassLTL2")
+  );
+  const shipClassLTL3Value = maybe(() =>
+    product.metadata.filter(item => item.key === "shipClassLTL3")
+  );
+  const shipClassLTL4Value = maybe(() =>
+    product.metadata.filter(item => item.key === "shipClassLTL4")
+  );
+  const shipClassLTL5Value = maybe(() =>
+    product.metadata.filter(item => item.key === "shipClassLTL5")
+  );
+  const shipClassLTL6Value = maybe(() =>
+    product.metadata.filter(item => item.key === "shipClassLTL6")
+  );
+  const shipClassLTL7Value = maybe(() =>
+    product.metadata.filter(item => item.key === "shipClassLTL7")
+  );
+  const shipClassLTL8Value = maybe(() =>
+    product.metadata.filter(item => item.key === "shipClassLTL8")
+  );
   return {
     basePrice: maybe(() => product.basePrice.amount, 0),
     category: maybe(() => product.category.id, ""),
@@ -195,12 +263,28 @@ export function getProductUpdatePageFormData(
       () => product.collections.map(collection => collection.id),
       []
     ),
+    combineExceptions: maybe(() => combineExceptionsValue[0].value, ""),
     description: maybe(() => JSON.parse(product.descriptionJson)),
     isPublished: maybe(() => product.isPublished, false),
+    itemNumber: maybe(() => itemNumberValue[0].value, ""),
+    itemSizeHeight: maybe(() => itemSizeHeightValue[0].value, ""),
+    itemSizeLength: maybe(() => itemSizeLengthValue[0].value, ""),
+    itemSizeWidth: maybe(() => itemSizeWidthValue[0].value, ""),
+    itemStackConfigHeight: maybe(() => itemStackConfigHeightValue[0].value, ""),
+    itemStackConfigLength: maybe(() => itemStackConfigLengthValue[0].value, ""),
+    itemStackConfigWidth: maybe(() => itemStackConfigWidthValue[0].value, ""),
     name: maybe(() => product.name, ""),
     publicationDate: maybe(() => product.publicationDate, ""),
     seoDescription: maybe(() => product.seoDescription, ""),
     seoTitle: maybe(() => product.seoTitle, ""),
+    shipClassLTL1: maybe(() => shipClassLTL1Value[0].value, ""),
+    shipClassLTL2: maybe(() => shipClassLTL2Value[0].value, ""),
+    shipClassLTL3: maybe(() => shipClassLTL3Value[0].value, ""),
+    shipClassLTL4: maybe(() => shipClassLTL4Value[0].value, ""),
+    shipClassLTL5: maybe(() => shipClassLTL5Value[0].value, ""),
+    shipClassLTL6: maybe(() => shipClassLTL6Value[0].value, ""),
+    shipClassLTL7: maybe(() => shipClassLTL7Value[0].value, ""),
+    shipClassLTL8: maybe(() => shipClassLTL8Value[0].value, ""),
     sku: maybe(
       () =>
         product.productType.hasVariants
@@ -210,7 +294,8 @@ export function getProductUpdatePageFormData(
           : undefined,
       ""
     ),
-    trackInventory: !!product?.variants[0]?.trackInventory
+    trackInventory: !!product?.variants[0]?.trackInventory,
+    weight: maybe(() => weightValue[0].value, "")
   };
 }
 

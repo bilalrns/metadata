@@ -105,7 +105,17 @@ export const CustomerDetailsView: React.FC<CustomerDetailsViewProps> = ({
                               isActive: formData.isActive,
                               lastName: formData.lastName,
                               note: formData.note
-                            }
+                            },
+                            metadata: [
+                              {
+                                key: "fee",
+                                value: formData.isFee
+                              },
+                              {
+                                key: formData.inputType,
+                                value: formData.discountValue
+                              }
+                            ]
                           }
                         })
                       }

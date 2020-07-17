@@ -15,6 +15,7 @@ import { getUserName, maybe } from "../../../misc";
 import { CustomerDetails_user } from "../../types/CustomerDetails";
 import CustomerAddresses from "../CustomerAddresses";
 import CustomerDetails from "../CustomerDetails";
+import CustomerFeesAndDiscounts from "../CustomerFeesAndDiscounts";
 import CustomerInfo from "../CustomerInfo";
 import CustomerOrders from "../CustomerOrders";
 import CustomerStats from "../CustomerStats";
@@ -23,8 +24,11 @@ export interface CustomerDetailsPageFormData {
   firstName: string;
   lastName: string;
   email: string;
+  inputType: string;
   isActive: boolean;
+  discountValue: string;
   note: string;
+  isFee: string;
 }
 
 export interface CustomerDetailsPageProps {
@@ -53,13 +57,19 @@ const CustomerDetailsPage: React.FC<CustomerDetailsPageProps> = ({
   onDelete
 }: CustomerDetailsPageProps) => {
   const intl = useIntl();
+  const isFeeValue = maybe(() =>
+    customer.metadata.filter(item => item.key === "fee")
+  );
 
   return (
     <Form
       initial={{
+        discountValue: maybe(() => customer.metadata[0].value, "0"),
         email: maybe(() => customer.email, ""),
         firstName: maybe(() => customer.firstName, ""),
+        inputType: maybe(() => customer.metadata[0].key, ""),
         isActive: maybe(() => customer.isActive, false),
+        isFee: maybe(() => JSON.parse(isFeeValue[0].value), false),
         lastName: maybe(() => customer.lastName, ""),
         note: maybe(() => customer.note, "")
       }}
@@ -83,6 +93,13 @@ const CustomerDetailsPage: React.FC<CustomerDetailsPageProps> = ({
               />
               <CardSpacer />
               <CustomerInfo
+                data={data}
+                disabled={disabled}
+                errors={errors}
+                onChange={change}
+              />
+              <CardSpacer />
+              <CustomerFeesAndDiscounts
                 data={data}
                 disabled={disabled}
                 errors={errors}

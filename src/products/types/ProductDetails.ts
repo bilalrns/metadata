@@ -188,6 +188,7 @@ export interface ProductDetails_product {
   basePrice: ProductDetails_product_basePrice | null;
   margin: ProductDetails_product_margin | null;
   purchaseCost: ProductDetails_product_purchaseCost | null;
+  metadata: any;
   isAvailable: boolean | null;
   isPublished: boolean;
   chargeTaxes: boolean;

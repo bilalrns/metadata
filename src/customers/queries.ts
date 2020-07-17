@@ -20,6 +20,10 @@ export const customerFragment = gql`
     email
     firstName
     lastName
+    metadata {
+      key
+      value
+    }
   }
 `;
 

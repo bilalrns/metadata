@@ -720,6 +720,7 @@ export interface SimpleProductUpdateVariables {
   collections?: (string | null)[] | null;
   descriptionJson?: any | null;
   isPublished: boolean;
+  metadata: any;
   name?: string | null;
   basePrice?: any | null;
   productVariantId: string;

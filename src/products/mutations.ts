@@ -198,6 +198,7 @@ export const simpleProductUpdateMutation = gql`
     $collections: [ID]
     $descriptionJson: JSONString
     $isPublished: Boolean!
+    $metadata: [MetadataInput!]!
     $name: String
     $basePrice: Decimal
     $productVariantId: ID!
@@ -207,6 +208,18 @@ export const simpleProductUpdateMutation = gql`
     $deleteStocks: [ID!]!
     $updateStocks: [StockInput!]!
   ) {
+    updateMetadata(id: $id, input: $metadata) {
+      metadataErrors {
+        field
+        code
+      }
+      item {
+        metadata {
+          key
+          value
+        }
+      }
+    }
     productUpdate(
       id: $id
       input: {
