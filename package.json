@@ -135,7 +135,7 @@
     "regenerator-runtime": "^0.11.1",
     "require-context.macro": "^1.1.1",
     "rimraf": "^3.0.0",
-    "testcafe": "^1.3.3",
+    "testcafe": "^3.7.4",
     "ts-jest": "^24.2.0",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "webpack": "^4.35.3",
